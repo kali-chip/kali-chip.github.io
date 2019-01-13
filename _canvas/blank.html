@@ -1,0 +1,42 @@
+---
+layout: kajero
+title: Blank Kajero/D3
+subtitle: Experiment subtitle
+description: This description is for the index
+datasources:
+    users: "https://jsonplaceholder.typicode.com/users"
+    colors: "/json/colors.json"
+tags: [test]
+---
+
+## This is a sample Notebook
+
+It _should_ get correctly parsed.
+
+[This is a link](http://github.com)
+
+![Image, with alt](https://github.com/thing.jpg "Optional title")
+![](https://github.com/thing.jpg)
+
+```python
+print "Non-runnable code sample"
+```
+
+And finally a runnable one...
+
+```javascript; runnable
+console.log("Runnable");
+```
+
+```javascript; runnable
+return data.users; // Datasources definidos en los metadatos
+```
+
+```javascript; runnable
+return data.colors.filter(x => x.color.indexOf('a') !== -1);
+```
+
+```
+Isolated non-runnable
+```
+

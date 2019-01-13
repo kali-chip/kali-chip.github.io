@@ -1,0 +1,47 @@
+---
+layout: page
+title: Generic WebGL Experiments
+subtitle: Just a list of existing experiments using raw WebGL
+use-site-title: true
+---
+
+<div class="posts-list">
+  {% for exer in site.webgl %}
+  <article class="post-preview">
+    <a href="{{ exer.url | prepend: site.baseurl }}" target="_blank">
+        <h2 class="post-title">{{ exer.title }}</h2>
+
+        {% if exer.subtitle %}
+        <h3 class="post-subtitle">
+            {{ exer.subtitle }}
+        </h3>
+        {% endif %}
+    </a>
+
+    <p class="post-meta">
+      {{ exer.date | date: "%Y-%m-%d" }}
+    </p>
+
+    <div class="post-entry-container">
+      <div class="post-entry">
+        {{ exer.description }}
+      </div>
+    </div>
+
+    {% if exer.tags.size > 0 %}
+    <div class="blog-tags">
+      Tags:
+      {% if site.link-tags %}
+      {% for tag in exer.tags %}
+      <a href="{{ site.baseurl }}/tags#{{- tag -}}">{{- tag -}}</a>
+      {% endfor %}
+      {% else %}
+        {{ exer.tags | join: ", " }}
+      {% endif %}
+    </div>
+    {% endif %}
+
+   </article>
+  {% endfor %}
+</div>
+
