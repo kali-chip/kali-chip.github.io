@@ -2,3 +2,8 @@ body {
     padding: 0;
     margin: 0;
 }
+canvas {
+    margin: 30px auto;
+    display: block;
+    border: dashed 1px #666;
+}
