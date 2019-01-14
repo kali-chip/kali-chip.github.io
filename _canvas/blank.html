@@ -11,7 +11,7 @@ tags: [test]
     let imageData;
     let idx360 = m.indexer(360);
     function init(canvas, ctx) {
-        imageData = context.createImageData(u.w, u.h);
+        imageData = ctx.createImageData(u.w, u.h);
     }
 
     function animate(canvas, ctx) {
@@ -24,7 +24,7 @@ tags: [test]
             imageData.data[(u.w*y + x) * 4 + 3] = 255;
           }
         }
-        context.putImageData(imageData, 0, 0);
+        ctx.putImageData(imageData, 0, 0);
     }
 
     u.ready(function() {
