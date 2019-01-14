@@ -1,0 +1,15 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+canvas {
+    margin: 30px auto;
+    display: block;
+    border: dashed 1px #666;
+    width:  90%;
+    height: 90%;
+    max-width: 1024px;
+    max-height: 768px;
+    min-width:  512px;
+    min-height: 384px;
+}

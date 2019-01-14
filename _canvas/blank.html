@@ -1,42 +1,37 @@
 ---
-layout: kajero
-title: Blank Kajero/D3
+layout: canvas
+title: Blank canvas
 subtitle: Experiment subtitle
 description: This description is for the index
-datasources:
-    users: "https://jsonplaceholder.typicode.com/users"
-    colors: "/json/colors.json"
 tags: [test]
 ---
+<script type="text/javascript">
+(function() {
 
-## This is a sample Notebook
+    let imageData;
+    let idx360 = m.indexer(360);
+    function init(canvas, ctx) {
+        imageData = context.createImageData(u.w, u.h);
+    }
 
-It _should_ get correctly parsed.
+    function animate(canvas, ctx) {
+        let t = m.toRad(idx360());
+        for(var y = 0; y < u.h; y++) {
+          for(var x = 0; x < u.w; x++) {
+            imageData.data[(u.w*y + x) * 4 + 0] = y/u.h * 255*Math.sin(t);
+            imageData.data[(u.w*y + x) * 4 + 1] = y/u.h * 255*Math.cos(t);
+            imageData.data[(u.w*y + x) * 4 + 2] = x/u.w * 255*Math.sin(t);
+            imageData.data[(u.w*y + x) * 4 + 3] = 255;
+          }
+        }
+        context.putImageData(imageData, 0, 0); 
+    }
 
-[This is a link](http://github.com)
-
-![Image, with alt](https://github.com/thing.jpg "Optional title")
-![](https://github.com/thing.jpg)
-
-```python
-print "Non-runnable code sample"
-```
-
-And finally a runnable one...
-
-```javascript; runnable
-console.log("Runnable");
-```
-
-```javascript; runnable
-return data.users; // Datasources definidos en los metadatos
-```
-
-```javascript; runnable
-return data.colors.filter(x => x.color.indexOf('a') !== -1);
-```
-
-```
-Isolated non-runnable
-```
-
+    ready(function() {
+        let canvas = u.dqs('#container');
+        let ctx = canvas.getContext('2d');
+        setup(canvas,ctx);
+        u.loop(animate, canvas, ctx);
+    });
+})();
+</script>
