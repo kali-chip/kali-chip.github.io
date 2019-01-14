@@ -1,10 +1,11 @@
 #container {
-    border: dotted 1px #666;
-    width: 90%;
+    box-sizing: content-box;
+    margin: 30px auto;
+    border: dashed 1px #666;
+    width:  90%;
     height: 90%;
-    max-width: 1000px;
+    max-width: 1200px;
     max-height: 800px;
-    min-height: 600px;
-    min-width: 800px;
-    margin: auto;
+    min-width:  600px;
+    min-height: 400px;
 }
