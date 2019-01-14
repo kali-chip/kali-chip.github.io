@@ -24,13 +24,13 @@ tags: [test]
             imageData.data[(u.w*y + x) * 4 + 3] = 255;
           }
         }
-        context.putImageData(imageData, 0, 0); 
+        context.putImageData(imageData, 0, 0);
     }
 
-    ready(function() {
+    u.ready(function() {
         let canvas = u.dqs('#container');
         let ctx = canvas.getContext('2d');
-        setup(canvas,ctx);
+        init(canvas,ctx);
         u.loop(animate, canvas, ctx);
     });
 })();
