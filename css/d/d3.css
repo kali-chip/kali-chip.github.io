@@ -1,0 +1,10 @@
+#container {
+    border: dotted 1px #666;
+    width: 90%;
+    height: 90%;
+    max-width: 1000px;
+    max-height: 800px;
+    min-height: 600px;
+    min-width: 800px;
+    margin: auto;
+}
