@@ -1,42 +1,33 @@
 ---
-layout: kajero
-title: Blank Kajero/D3
+layout: threejs
+title: Blank Three.js
 subtitle: Experiment subtitle
 description: This description is for the index
-datasources:
-    users: "https://jsonplaceholder.typicode.com/users"
-    colors: "/json/colors.json"
 tags: [test]
 ---
+<script type="text/javascript">
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-## This is a sample Notebook
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
 
-It _should_ get correctly parsed.
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
 
-[This is a link](http://github.com)
+    camera.position.z = 5;
 
-![Image, with alt](https://github.com/thing.jpg "Optional title")
-![](https://github.com/thing.jpg)
+    var animate = function () {
+        requestAnimationFrame( animate );
 
-```python
-print "Non-runnable code sample"
-```
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
 
-And finally a runnable one...
+        renderer.render( scene, camera );
+    };
 
-```javascript; runnable
-console.log("Runnable");
-```
-
-```javascript; runnable
-return data.users; // Datasources definidos en los metadatos
-```
-
-```javascript; runnable
-return data.colors.filter(x => x.color.indexOf('a') !== -1);
-```
-
-```
-Isolated non-runnable
-```
-
+    animate();
+</script>
