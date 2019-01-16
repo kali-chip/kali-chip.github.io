@@ -1,8 +1,8 @@
 ---
 common-css:
-  - "/css/kajero.css"
+  - "/css/w/webgl.css"
 common-js:
-  - "/js/kajero.js"
+  - "/js/w/webgl.js"
 ---
 <!DOCTYPE html>
 <html>
@@ -15,24 +15,8 @@ common-js:
     </head>
   -->
     <body>
-        <script type="text/markdown" id="kajero-md">
-            ---
-            created: "{% if page.date %}{{ page.date | date_to_rfc822 }}{% else %}Sun Jan 13 2019 17:28:01 GMT+0200 (CEST){% endif %}"
-      {{ exer.date | date: "%Y-%m-%d" }}
-            show_footer: false
-            author: "{%if page.author %}{{ page.author }}{% else %}jekyll{% endif %}"
-            title: "{% if page.title %}{{ page.title}}{% else %}Notebook exercise{% endif %}"
-            {% if page.datasources %}
-            datasources:
-                {% for ds in page.datasources %}
-                {{ ds[0] }}: "{{ ds[1] }}"
-                {% endfor %}
-            {% endif %}
-            ---
-            {{ content }}
-        </script>
-        <div id="kajero"></div>
+    <canvas id="container"></canvas>
     {% include footer-scripts.html %}
-    <!--    <script type="text/javascript" src="js/kajero.js"></script> -->
+    {{ content }}
     </body>
 </html>
