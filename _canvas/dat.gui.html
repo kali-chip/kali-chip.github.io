@@ -1,0 +1,54 @@
+---
+layout: canvas
+title: Blank canvas
+subtitle: Experiment subtitle
+description: This description is for the index
+common-js:
+ - "/js/dat-gui.min.js"
+tags: [test]
+---
+<style type="text/css" media="all">
+#view {
+  margin: 20px;
+  display: inline-block;
+  font-family: monospace;
+  width: 400px;
+  font-size: 22px;
+}
+</style>
+<div id="view"></div>
+<script type="text/javascript">
+(function() {
+    function initDat() {
+        // A mock model object
+        let model = {
+            text: "Hello",
+            amount: 23,
+            condition: true,
+            shade: '#FFCC33'
+        };
+
+        // A mock view
+        let view = document.querySelector('#view');
+
+        // A mock "rendering loop"
+        setInterval(()=> {
+            view.innerHTML = `Text: ${model.text}<br/>
+            Amount: ${model.amount}<br/>
+            Condition: ${model.condition}<br/>
+            Shade: ${model.shade}`;
+        },100);
+
+        let  gui = new dat.GUI();
+        gui.add(model, 'text');
+        gui.add(model, 'amount', -50, 50, 1);
+        gui.add(model, 'condition');
+        gui.addColor(model, 'shade');
+    }
+
+    u.ready(function() {
+        document.getElementById('container').remove();
+        initDat();
+    });
+})();
+</script>
