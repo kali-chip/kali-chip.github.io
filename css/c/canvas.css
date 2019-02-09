@@ -12,4 +12,5 @@ canvas {
     max-height: 768px;
     min-width:  512px;
     min-height: 384px;
+    background-color: black;
 }

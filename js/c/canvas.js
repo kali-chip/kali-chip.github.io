@@ -33,16 +33,22 @@ let u = (function() {
     let dqs = qs(document);
     let dqsas = compose(toArray, dqsa);
 
-    let t = 0;
     function loop(fn, canvas, ctx) {
         ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
         fn(canvas, ctx);
         raf(()=>{loop(fn,canvas,ctx)});
     }
+    function tloop(fn, canvas, ctx, lt) => {
+        let t = new Date().getTime();
+        let delta = (!lt)?0:t-lt;
+        ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        fn(canvas,ctx,delta);
+        raf(()=>{tloop(fn,canvas,ctx,t)});
+    }
 
 
     return {
-        loop, ready,
+        tloop, loop, ready,
         compose, map, reduce, prop, pluck, toArray,
         qsa, qsai, qsi, qs, dqsa, dqs, dqsas,
         w: CANVAS_WIDTH,
@@ -53,9 +59,9 @@ let u = (function() {
 let m = (function() {
     let toRad = (d) => d * Math.PI / 180;
     let toDeg = (r) => r * 180 / Math.PI;
-    let indexer = (w,s=0) => () => {
+    let indexer = (w,s=0,l=0) => () => {
         s = (s+1)%w;
-        return s;
+        return s+l;
     };
 
     return {

@@ -1,0 +1,43 @@
+---
+layout: canvas
+title: A vector based "eighties grid"
+subtitle: For comparison of raster and vector approaches
+description: Just draw a typical perspective grid using the canvas shape-based API
+tags: [canvas, basic, vector]
+---
+<script type="text/javascript">
+(function() {
+    const CENTER = {
+        x: u.w/2,
+        y: u.h/4
+    };
+    let GRID_SIZE = 80;
+
+    function init(canvas, ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgb(255,0,255)';
+        ctx.lineWidth = 3;
+        for (let x=-u.w; x < 2*u.w; x += GRID_SIZE) {
+            ctx.moveTo(x, u.h);
+            ctx.lineTo(CENTER.x, CENTER.y);
+        }
+        let depth = GRID_SIZE;
+        for (let y=u.h-1; y>=u.h/2; y-=depth) {
+            ctx.moveTo(0,y);
+            ctx.lineTo(u.w,y);
+            depth *= 0.85;
+        }
+        ctx.stroke();
+        ctx.moveTo(0,u.h/2+1);
+        ctx.lineTo(u.w,u.h/2+1);
+        ctx.stroke();
+        ctx.clearRect(0,0,u.w,u.h/2);
+    }
+    u.ready(function() {
+        let canvas = u.dqs('#container');
+        let ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,u.w,u.h);
+        init(canvas,ctx);
+    });
+})();
+</script>
