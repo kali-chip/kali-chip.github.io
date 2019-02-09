@@ -16,15 +16,16 @@ tags: [canvas, basic, raster]
 
     function animate(canvas, ctx) {
         let t = m.toRad(idx360());
-        for(var y = 0; y < u.h; y++) {
-          for(var x = 0; x < u.w; x++) {
+        for(let y = 0; y < u.h; y++) {
+          for(let x = 0; x < u.w; x++) {
             imageData.data[(u.w*y + x) * 4 + 0] = y/u.h * 255*Math.sin(t);
             imageData.data[(u.w*y + x) * 4 + 1] = y/u.h * 255*Math.cos(t);
             imageData.data[(u.w*y + x) * 4 + 2] = x/u.w * 255*Math.sin(t);
             imageData.data[(u.w*y + x) * 4 + 3] = 255;
           }
         }
-        for(var n = 0; n < imageData.data.length; n+=1+t*Math.floor(Math.random()*8 +1)) {
+        let tl = imageData.data.length;
+        for(let n = 0; n < tl; n+=1+t*Math.floor(Math.random()*8 +1)) {
             imageData.data[n] = imageData.data[n] * Math.sin(t);
         }
         ctx.putImageData(imageData, 0, 0);
