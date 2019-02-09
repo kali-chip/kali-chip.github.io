@@ -1,0 +1,40 @@
+---
+layout: canvas
+title: A raster based plasma effect - glitched
+subtitle: For comparison of raster and vector approaches
+description: Just your typical "plasma" effect, to showcase direct bitmap manipulation
+tags: [canvas, basic, raster]
+---
+<script type="text/javascript">
+(function() {
+
+    let imageData;
+    let idx360 = m.indexer(360);
+    function init(canvas, ctx) {
+        imageData = ctx.createImageData(u.w, u.h);
+    }
+
+    function animate(canvas, ctx) {
+        let t = m.toRad(idx360());
+        for(var y = 0; y < u.h; y++) {
+          for(var x = 0; x < u.w; x++) {
+            imageData.data[(u.w*y + x) * 4 + 0] = y/u.h * 255*Math.sin(t);
+            imageData.data[(u.w*y + x) * 4 + 1] = y/u.h * 255*Math.cos(t);
+            imageData.data[(u.w*y + x) * 4 + 2] = x/u.w * 255*Math.sin(t);
+            imageData.data[(u.w*y + x) * 4 + 3] = 255;
+          }
+        }
+        for(var n = 0; n < imageData.length; n+=Math.floor(Math.sin(t))) {
+            imageData[n] = imageData[n] * Math.sin(t);
+        }
+        ctx.putImageData(imageData, 0, 0);
+    }
+
+    u.ready(function() {
+        let canvas = u.dqs('#container');
+        let ctx = canvas.getContext('2d');
+        init(canvas,ctx);
+        u.loop(animate, canvas, ctx);
+    });
+})();
+</script>
