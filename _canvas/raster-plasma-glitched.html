@@ -24,7 +24,7 @@ tags: [canvas, basic, raster]
             imageData.data[(u.w*y + x) * 4 + 3] = 255;
           }
         }
-        for(var n = 0; n < imageData.data.length; n+=Math.floor(Math.sin(t))) {
+        for(var n = 0; n < imageData.data.length; n+=t) {
             imageData.data[n] = imageData.data[n] * Math.sin(t);
         }
         ctx.putImageData(imageData, 0, 0);
