@@ -11,7 +11,6 @@ tags: [canvas, basic, raster]
     let imageData;
     let idx360 = m.indexer(360);
     let idx100 = m.indexer(100);
-    let tl = imageData.data.length;
     function init(canvas, ctx) {
         imageData = ctx.createImageData(u.w, u.h);
     }
@@ -26,6 +25,7 @@ tags: [canvas, basic, raster]
             imageData.data[(u.w*y + x) * 4 + 3] = 255;
           }
         }
+        let tl = imageData.data.length;
         for(let n = 0; n < tl; n = n + 2  + 3*idx100()) {
             imageData.data[n] = 200;
         }
