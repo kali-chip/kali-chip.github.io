@@ -38,7 +38,7 @@ let u = (function() {
         fn(canvas, ctx);
         raf(()=>{loop(fn,canvas,ctx)});
     }
-    function tloop(fn, canvas, ctx, lt) => {
+    function tloop(fn, canvas, ctx, lt) {
         let t = new Date().getTime();
         let delta = (!lt)?0:t-lt;
         ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
