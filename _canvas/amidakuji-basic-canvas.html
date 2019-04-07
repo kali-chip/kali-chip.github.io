@@ -1,0 +1,58 @@
+---
+layout: canvas
+title: First iteration of an Amidakuji implementation
+subtitle: Using a canvas, we'll generate the random grid
+description: Just draw some number of vertical lines and then some random number of horizontal ones
+tags: [canvas, basic, amidakuji, lines]
+js:
+  - "/js/amidakuji/amidakuji.js"
+---
+<script type="text/javascript">
+(function() {
+    const MARGIN = 40;
+    let canvas, ctx;
+    let control = {
+        lanes: 8
+    };
+
+    function drawAmidakuji(grid) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgb(255,0,0)';
+        ctx.lineWidth = 5;
+        grid.lanes.forEach(function(lane) {
+            ctx.moveTo(MARGIN+lane.x, MARGIN+lane.y.u);
+            ctx.lineTo(MARGIN+lane.x, MARGIN+lane.y.d);
+            lane.links.forEach(function(link) {
+                ctx.moveTo(MARGIN+link.x.l, MARGIN+link.y);
+                ctx.lineTo(MARGIN+link.x.r, MARGIN+link.y);
+            });
+        });
+        ctx.stroke();
+    }
+
+    function initAmidakuji() {
+        ctx.clearRect(0,0,u.w,u.h);
+        let usableWidth = u.w - 2*MARGIN;
+        let usableHeight = u.h - 2*MARGIN;
+        let grid = new Amidakuji(control.lanes, usableWidth, usableHeight);
+        // grid.generateLinks();
+        drawAmidakuji(grid);
+    }
+
+    function init(canvas, ctx) {
+        initAmidakuji();
+        let  gui = new dat.GUI();
+        let lanes = gui.add(control, 'lanes', 4, 12, 1);
+        lanes.onFinishChange(initAmidakuji);
+    }
+    //function animate(canvas, ctx) {
+    //}
+    u.ready(function() {
+        canvas = u.dqs('#container');
+        ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,u.w,u.h);
+        init(canvas,ctx);
+        //u.loop(animate, canvas, ctx);
+    });
+})();
+</script>
